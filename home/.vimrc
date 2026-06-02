@@ -1,3 +1,6 @@
+" =====================================================================
+" Setting Basic Settings
+" =====================================================================
 set number                  " show line numbers
 set relativenumber
 set mouse=a                 " enable mouse support
@@ -14,32 +17,21 @@ syntax on
 set cursorline
 set nocursorline
 set termguicolors
-
-
 syntax on
 filetype plugin indent on
 
-set clipboard=unnamedplus
-vnoremap <C-C> "+y
-nnoremap <C-X> "+d
-nnoremap <C-V> "+P
-inoremap <C-V> <C-R>+
-nnoremap <C-Q> :q<CR>
 
+" =====================================================================
+" Highlighting
+" =====================================================================
 highlight StatusLineNormal ctermfg=White ctermbg=Blue
 highlight StatusLineInsert ctermfg=White ctermbg=Green
 highlight StatusLineVisual ctermfg=White ctermbg=Yellow
 highlight StatusLineDefault ctermfg=White ctermbg=Black
 
-" =====================================================================
-" Appearance & Color Scheme (Built-in)
-" =====================================================================
-
-" A sleek, dark built-in alternative to Catppuccin
-colorscheme ron
 
 " =====================================================================
-" Status Line Configuration (Built-in Alternative to Lightline)
+" Status Line Configuration
 " =====================================================================
 " Always display the status line
 set laststatus=2
