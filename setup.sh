@@ -3,6 +3,17 @@
 # Stop executing if any individual command fails
 set -e
 
+echo "      __   __  ______    ___   _______  ___     " 
+echo "     |  | |  ||    _ |  |   | |       ||   |    "
+echo "     |  | |  ||   | ||  |   | |    ___||   |    "
+echo "     |  |_|  ||   |_||_ |   | |   |___ |   |    "
+echo "     |       ||    __  ||   | |    ___||   |___ "
+echo "     |       ||   |  | ||   | |   |___ |       |"
+echo "     |_______||___|  |_||___| |_______||_______|"
+echo ""
+echo ""
+
+
 echo "Running Module 1: Package Installation"
 
 # Checking for MacOS
