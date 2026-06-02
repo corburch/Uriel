@@ -9,7 +9,7 @@ The following is the exact order to do all commands because I am a dunce and can
 ### Step 1: Clone the Repository Infrastructure
 → Pull the custom framework straight from GitHub into your home directory:
 ```bash
-git clone https://github.com/yourusername/uriel.git ~/uriel```
+git clone https://github.com/yourusername/uriel.git ~/uriel
 ```
 
 <br>
