@@ -126,4 +126,65 @@ if [ -d "$REPO_FONTS_DIR" ] && [ "$(ls -A "$REPO_FONTS_DIR" 2>/dev/null)" ]; the
 else
     echo "ℹ️ No custom fonts found in assets/fonts/. Skipping font installation."
 
+echo "✅ Module 3 Complete: Fonts are deployed!"
+
+
+
+
+
+
+echo ""
+echo "Running Module 4: Symlink Deployment"
+
+# Define base directories
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONFIG_TARGET="$HOME/.config"
+
+echo "🔗 Creating system portals via symbolic links..."
+
+# Ensure the system ~/.config directory exists
+mkdir -p "$CONFIG_TARGET"
+
+# Helper Function to Safley Link Files
+link_file() {
+    local source_file="$1"
+    local target_file="$2"
+
+    # If a real file already exists and is NOT a symlink, back it up
+    if [ -f "$target_file" ] && [ ! -L "$target_file" ]; then
+        echo "⚠️  Found existing config at $target_file. Backing up to ${target_file}.bak"
+        mv "$target_file" "${target_file}.bak"
+    # If a broken or old symlink is already there, delete it
+    elif [ -L "$target_file" ]; then
+        rm "$target_file"
+    fi
+
+    # Create the parent directory for the target if it doesn't exist
+    mkdir -p "$(dirname "$target_file")"
+
+    # Create the symbolic link
+    ln -s "$source_file" "$target_file"
+    echo "✅ Linked: $target_file -> $source_file"
+}
+
+# Deploy Home Dotfiles
+link_file "$BASE_DIR/home/.zshrc" "$HOME/.zshrc"
+link_file "$BASE_DIR/home/.vimrc" "$HOME/.vimrc"
+
+# Deploy .config Subdirectories (Fastfetch & LSD)
+if [ -d "$BASE_DIR/config/fastfetch" ]; then
+    link_file "$BASE_DIR/config/fastfetch/config.jsonc" "$CONFIG_TARGET/fastfetch/config.jsonc"
+fi
+
+if [ -d "$BASE_DIR/config/lsd" ]; then
+    link_file "$BASE_DIR/config/lsd/config.yaml" "$CONFIG_TARGET/lsd/config.yaml"
+fi
+
+echo "✅ Module 4 Complete: All configuration profiles active!"
+
+
+
+
+
+
 echo "🎉 ALL SYSTEMS CONFIGURED SUCCESSFULLY! 🎉"
