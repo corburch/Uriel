@@ -1,0 +1,31 @@
+# =====================================================================
+# LSDeluxe (lsd) Custom Configuration Profile
+# =====================================================================
+
+# 1. Icons Customization
+icons:
+  when: auto        # Only render icons when printing to a terminal prompt
+  theme: fancy      # Uses full-color Nerd Font glyph icons
+
+# 2. Classic File Metrics Layout
+# Controls what columns display when you use long format (e.g., your 'lla' alias)
+blocks:
+  - permission
+  - size
+  - date
+  - name
+
+# 3. Micro-Styling Details
+classic: false      # Set to true if you ever want to completely disable colors/icons
+date: "+%b %d %H:%M" # Formats dates cleanly like "Jun 02 16:24" instead of long timestamps
+size: short         # Renders file sizes compactly (e.g., "4K", "12M") rather than raw bytes
+
+# 4. Sorting Parameters
+sorting:
+  column: name      # Sort alphabetically
+  reverse: false
+  dir-grouping: first # Keeps folders neatly grouped together above loose files
+
+# 5. Visual Rendering Controls
+symlink-arrow: " ➜ " # A sharp, minimalist pointer for symbolic link targets
+hyperlink: never    # Keeps text clean instead of making every filename a clickable URL
