@@ -46,3 +46,41 @@ else
 fi
 
 echo "✅ Module 1 Complete: All foundational packages verified!"
+
+
+
+echo ""
+echo "=========================================="
+echo " Running Module 2: Frameworks & Themes    "
+echo "=========================================="
+
+# Define target installation paths
+OMZ_DIR="$HOME/.oh-my-zsh"
+P10K_DIR="$OMZ_DIR/custom/themes/powerlevel10k"
+
+# Automate Oh My ZSH Installation
+if [ ! -d "$OMZ_DIR" ]; then
+    echo "📥 Oh My ZSH not found. Downloading and installing silently..."
+
+    # Run the official installer with automation flags injected
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+
+    echo "✅ Oh My ZSH installed successfully."
+else
+    echo "ℹ️ Oh My ZSH is already installed. Skipping download."
+fi
+
+# Automate Powerlevel10k Installation
+if [ ! -d "$P10K_DIR" ]; then
+    echo "📥 Powerlevel10k theme not found. Cloning repository..."
+
+    # Clone the theme directly into the Oh My ZSH custom themes directory
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"
+
+    echo "✅ Powerlevel10k theme downloaded successfully."
+else
+    echo "ℹ️ Powerlevel10k theme is already installed. Skipping download."
+fi
+
+echo "✅ Module 2 Complete: Styling frameworks are ready!"
+
