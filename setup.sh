@@ -6,7 +6,7 @@ set -e
 echo "Running Module 1: Package Installation"
 
 # Checking for MacOS
-if [ "$OSTYPE" = "darwin"* ]; then
+if [[ "$OSTYPE" = "darwin"* ]]; then
     echo "▶ Deteced MacOS environment."
 
     if ! command -v brew &> /dev/null; then
@@ -29,7 +29,7 @@ elif [ "$(uname)" = "Linux" ]; then
         echo "📦 Distribution: Fedora. Using DNF..."
         sudo dnf install -y vim zsh fastfetch lsd
 
-    elif [ -f /etc/debain_version ] || grep -q "debian\|ubuntu" /etc/os-release 2>/dev/null; then
+    elif [ -f /etc/debian_version ] || grep -q "debian\|ubuntu" /etc/os-release 2>/dev/null; then
         echo "📦 Distribution: Debian/Ubuntu. Using APT..."
         sudo apt-get update
         sudo apt-get install -y vim zsh fastfetch lsd
@@ -125,6 +125,7 @@ if [ -d "$REPO_FONTS_DIR" ] && [ "$(ls -A "$REPO_FONTS_DIR" 2>/dev/null)" ]; the
 
 else
     echo "ℹ️ No custom fonts found in assets/fonts/. Skipping font installation."
+fi
 
 echo "✅ Module 3 Complete: Fonts are deployed!"
 
