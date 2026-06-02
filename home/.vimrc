@@ -47,5 +47,3 @@ set statusline=%F\ %h%m%r\ [%{mode()}]\ %l:%c\ %P\ %{ModeShortcuts()}
 
 set incsearch
 set hlsearch
-colorscheme catppuccin_frappe
-let g:lightline = { 'colorscheme': 'catppuccin_frappe' }
