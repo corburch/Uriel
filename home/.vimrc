@@ -31,19 +31,30 @@ highlight StatusLineInsert ctermfg=White ctermbg=Green
 highlight StatusLineVisual ctermfg=White ctermbg=Yellow
 highlight StatusLineDefault ctermfg=White ctermbg=Black
 
-function! ModeShortcuts()
-    if mode() ==# 'n'
-        return '%#StatusLineNormal# Normal: Q=Quit X=Cut C=Copy V=Paste Z=Undo %#StatusLineDefault#'
-    elseif mode() ==# 'i'
-        return '%#StatusLineInsert# Insert: Esc=Normal C=Copy V=Paste Z=Undo %#StatusLineDefault#'    
-    elseif mode() ==# 'v'
-       return '%#StatusLineVisual# Visual: Esc=Normal C=Copy X=Cut V=Paste %#StatusLineDefault#'
-    else
-        return ''
-    endif
-endfunction
+" =====================================================================
+" Appearance & Color Scheme (Built-in)
+" =====================================================================
 
-set statusline=%F\ %h%m%r\ [%{mode()}]\ %l:%c\ %P\ %{ModeShortcuts()}
+" A sleek, dark built-in alternative to Catppuccin
+colorscheme ron
 
-set incsearch
-set hlsearch
+" =====================================================================
+" Status Line Configuration (Built-in Alternative to Lightline)
+" =====================================================================
+" Always display the status line
+set laststatus=2
+
+" Clear any existing format
+set statusline=
+
+" Status line layout:
+set statusline+=%#Visual#\                 " Highlight block
+set statusline+=%{&fileformat}\ \        " Format + Apple logo/icon
+set statusline+=%#StatusLine#\             " Switch highlight
+set statusline+=%F\                        " Full path to the file
+set statusline+=%m\                        " Modified flag [+]
+set statusline+=%=                         " Push right side alignments
+set statusline+=%#Visual#\                 " Highlight block
+set statusline+=%Y\                        " File type (e.g., VIM / BASH)
+set statusline+=%v:%l/%L\                  " Virtual col : Line / Total Lines
+set statusline+=\
