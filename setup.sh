@@ -3,9 +3,7 @@
 # Stop executing if any individual command fails
 set -e
 
-echo "========================================"
 echo " Running Module 1: Package Installation "
-echo "========================================"
 
 # Checking for MacOS
 if [ "$OSTYPE" = "darwin"* ]; then
@@ -16,8 +14,8 @@ if [ "$OSTYPE" = "darwin"* ]; then
         exit 1
     fi
 
-    echo "📦 Installing Vim, ZSH, and Fastfetch via Homebrew..."
-    brew install vim zsh fastfetch
+    echo "📦 Installing Vim, ZSH, lsd, and Fastfetch via Homebrew..."
+    brew install vim zsh fastfetch lsd
 
 # Check for Linux Environments
 elif [ "$(uname)" = "Linux" ]; then
@@ -25,16 +23,16 @@ elif [ "$(uname)" = "Linux" ]; then
 
     if [ -f /etc/arch-release ]; then
         echo "📦 Distribution: Arch Linux. Using Pacman..."
-        sudo pacman -S --noconfirm vim zsh fastfetch
+        sudo pacman -S --noconfirm vim zsh fastfetch lsd
 
     elif [ -f /etc/fedora-release ] || grep -q "fedora" /etc/os-release 2>/dev/null; then
         echo "📦 Distribution: Fedora. Using DNF..."
-        sudo dnf install -y vim zsh fastfetch
+        sudo dnf install -y vim zsh fastfetch lsd
 
     elif [ -f /etc/debain_version ] || grep -q "debian\|ubuntu" /etc/os-release 2>/dev/null; then
         echo "📦 Distribution: Debian/Ubuntu. Using APT..."
         sudo apt-get update
-        sudo apt-get install -y vim zsh fastfetch
+        sudo apt-get install -y vim zsh fastfetch lsd
 
     else
         echo "⚠️ Unknown Linux distribution. Skipping automatic package installation."
