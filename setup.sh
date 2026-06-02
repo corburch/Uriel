@@ -3,7 +3,7 @@
 # Stop executing if any individual command fails
 set -e
 
-echo " Running Module 1: Package Installation "
+echo "Running Module 1: Package Installation"
 
 # Checking for MacOS
 if [ "$OSTYPE" = "darwin"* ]; then
@@ -47,10 +47,11 @@ echo "✅ Module 1 Complete: All foundational packages verified!"
 
 
 
+
+
+
 echo ""
-echo "=========================================="
-echo " Running Module 2: Frameworks & Themes    "
-echo "=========================================="
+echo "Running Module 2: Frameworks & Themes"
 
 # Define target installation paths
 OMZ_DIR="$HOME/.oh-my-zsh"
@@ -82,3 +83,47 @@ fi
 
 echo "✅ Module 2 Complete: Styling frameworks are ready!"
 
+
+
+
+
+echo ""
+echo "Running Module 3: Font Asset Automator"
+
+# Define where are fonts are stored
+REPO_FONTS_DIR="$(dirname "$0")/assets/fonts"
+
+# Check if the repo folder exists and actually contains files
+if [ -d "$REPO_FONTS_DIR" ] && [ "$(ls -A "$REPO_FONTS_DIR" 2>/dev/null)" ]; then
+
+    # MacOS Font Deployment
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        TARGET_FONT_DIR="$HOME/Library/Fonts"
+        echo "📥 Copying custom fonts to macOS User Font Library..."
+
+        mkdir -p "$TARGET_FONT_DIR/"
+        cp "$REPO_FONTS_DIR"/* "$TARGET_FONT_DIR/"
+
+        echo "✅ Fonts copied to macOS directory."
+    
+    elif [ "$(uname)" = "Linux" ]; then
+        TARGET_FONT_DIR="$HOME/.local/share/fonts"
+        echo "📥 Copying custom fonts to Linux user font directory..."
+        
+        mkdir -p "$TARGET_FONT_DIR"
+        cp "$REPO_FONTS_DIR"/* "$TARGET_FONT_DIR/"
+        
+        # Ensure the operating system has absolute clearance to read the files
+        echo "🔒 Adjusting font file permissions (chmod 644)..."
+        chmod 644 "$TARGET_FONT_DIR"/*
+        
+        # Force Linux to rebuild its active font database cache
+        echo "🔄 Refreshing system font cache..."
+        fc-cache -f
+        echo "✅ Fonts deployed and cache refreshed."
+    fi
+
+else
+    echo "ℹ️ No custom fonts found in assets/fonts/. Skipping font installation."
+
+echo "🎉 ALL SYSTEMS CONFIGURED SUCCESSFULLY! 🎉"
