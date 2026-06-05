@@ -67,6 +67,7 @@ echo "Running Module 2: Frameworks & Themes"
 # Define target installation paths
 OMZ_DIR="$HOME/.oh-my-zsh"
 P10K_DIR="$OMZ_DIR/custom/themes/powerlevel10k"
+VIM_THEME_DIR="$HOME/.vim/pack/themes/start/tokyonight"
 
 # Automate Oh My ZSH Installation
 if [ ! -d "$OMZ_DIR" ]; then
@@ -151,11 +152,22 @@ echo "Running Module 4: Symlink Deployment"
 # Define base directories
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_TARGET="$HOME/.config"
+THEME_TARGET="$CONFIG_TARGET/themes/tokyonight"
 
 echo "🔗 Creating system portals via symbolic links..."
 
 # Ensure the system ~/.config directory exists
 mkdir -p "$CONFIG_TARGET"
+mkdir -p "$CONFIG_TARGET/themes"
+
+# Automate Global Tokyo Night Asset Download
+if [ ! -d "$THEME_TARGET" ]; then
+    echo "📥 Tokyo Night asset repository not found. Downloading palette database..."
+    git clone --depth=1 https://github.com/folke/tokyonight.nvim.git "$THEME_TARGET"
+    echo "✅ Tokyo Night assets stored at $THEME_TARGET"
+else
+    echo "ℹ️ Tokyo Night assets already present. Skipping download."
+fi
 
 # Helper Function to Safley Link Files
 link_file() {

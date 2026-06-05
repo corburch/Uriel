@@ -16,9 +16,18 @@ set laststatus=2            " always show status line
 syntax on
 set cursorline
 set nocursorline
-set termguicolors
 syntax on
+set termguicolors
 filetype plugin indent on
+
+
+" =====================================================================
+" Colorschemeing
+" =====================================================================
+
+let g:tokyonight_style = 'storm'
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 
 
 " =====================================================================
