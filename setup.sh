@@ -161,13 +161,37 @@ mkdir -p "$CONFIG_TARGET"
 mkdir -p "$CONFIG_TARGET/themes"
 
 # Automate Global Tokyo Night Asset Download
-if [ ! -d "$THEME_TARGET" ]; then
-    echo "📥 Tokyo Night asset repository not found. Downloading palette database..."
-    git clone --depth=1 https://github.com/folke/tokyonight.nvim.git "$THEME_TARGET"
-    echo "✅ Tokyo Night assets stored at $THEME_TARGET"
-else
-    echo "ℹ️ Tokyo Night assets already present. Skipping download."
-fi
+# Define Konsole local configuration directory path
+KONSOLE_DIR="$HOME/.local/share/konsole"
+mkdir -p "$KONSOLE_DIR"
+
+# Define Konsole local configuration directory path
+KONSOLE_DIR="$HOME/.local/share/konsole"
+mkdir -p "$KONSOLE_DIR"
+
+echo "📥 Syncing full Tokyo Night Color Suite for Konsole..."
+
+# Array mapping local file names to their raw remote source files
+declare -A TOKYONIGHT_SCHEMES=(
+    ["TokyoNight.colorscheme"]="https://raw.githubusercontent.com/david-brennan/tokyonight-konsole/main/TokyoNight.colorscheme"
+    ["TokyoNightStorm.colorscheme"]="https://raw.githubusercontent.com/david-brennan/tokyonight-konsole/main/TokyoNightStorm.colorscheme"
+    ["TokyoNightMoon.colorscheme"]="https://raw.githubusercontent.com/david-brennan/tokyonight-konsole/main/TokyoNightMoon.colorscheme"
+    ["TokyoNightDay.colorscheme"]="https://raw.githubusercontent.com/david-brennan/tokyonight-konsole/main/TokyoNightDay.colorscheme"
+)
+
+# Loop through the array to download each theme seamlessly
+for SCHEME_FILE in "${!TOKYONIGHT_SCHEMES[@]}"; do
+    TARGET_PATH="$KONSOLE_DIR/$SCHEME_FILE"
+    
+    if [ ! -f "$TARGET_PATH" ]; then
+        echo "  ↳ Downloading $SCHEME_FILE..."
+        curl -sSLo "$TARGET_PATH" "${TOKYONIGHT_SCHEMES[$SCHEME_FILE]}"
+    else
+        echo "  ↳ ℹ️ $SCHEME_FILE already present."
+    fi
+done
+
+echo "✅ All Tokyo Night variants successfully imported into Konsole."
 
 # Define the native Vim theme startup directory
 VIM_THEME_DIR="$HOME/.vim/pack/themes/start/tokyonight"
