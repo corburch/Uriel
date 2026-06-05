@@ -2,13 +2,16 @@
 # URIEL CORE TERMINAL PROFILE (.zshrc)
 # =====================================================================
 
+
+# Quiet the instant prompt warning to allow fastfetch to print seamlessly
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 # 1. Powerlevel10k Instant Prompt Initialization
 # Speeds up shell startup times dramatically by rendering the prompt ahead of modules
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# Quiet the instant prompt warning to allow fastfetch to print seamlessly
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 
 # 2. Oh My ZSH Base System Architecture
 export ZSH="$HOME/.oh-my-zsh"
