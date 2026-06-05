@@ -160,11 +160,6 @@ echo "🔗 Creating system portals via symbolic links..."
 mkdir -p "$CONFIG_TARGET"
 mkdir -p "$CONFIG_TARGET/themes"
 
-# Automate Global Tokyo Night Asset Download
-# Define Konsole local configuration directory path
-KONSOLE_DIR="$HOME/.local/share/konsole"
-mkdir -p "$KONSOLE_DIR"
-
 # Define Konsole local configuration directory path
 KONSOLE_DIR="$HOME/.local/share/konsole"
 mkdir -p "$KONSOLE_DIR"
@@ -179,19 +174,27 @@ declare -A TOKYONIGHT_SCHEMES=(
     ["TokyoNightDay.colorscheme"]="https://raw.githubusercontent.com/david-brennan/tokyonight-konsole/main/TokyoNightDay.colorscheme"
 )
 
-# Loop through the array to download each theme seamlessly
+# Loop through the array to download and patch each theme
 for SCHEME_FILE in "${!TOKYONIGHT_SCHEMES[@]}"; do
     TARGET_PATH="$KONSOLE_DIR/$SCHEME_FILE"
     
-    if [ ! -f "$TARGET_PATH" ]; then
-        echo "  ↳ Downloading $SCHEME_FILE..."
-        curl -sSLo "$TARGET_PATH" "${TOKYONIGHT_SCHEMES[$SCHEME_FILE]}"
+    # Extract a clean name for the GUI (e.g., "TokyoNightStorm")
+    CLEAN_NAME="${SCHEME_FILE%.colorscheme}"
+    
+    echo "  ↳ Syncing $CLEAN_NAME..."
+    
+    # Always pull a fresh copy to overwrite the broken un-named cache
+    curl -sSLo "$TARGET_PATH" "${TOKYONIGHT_SCHEMES[$SCHEME_FILE]}"
+    
+    # Inject the internal Description metadata so Konsole displays it right
+    if grep -q "^Description=" "$TARGET_PATH"; then
+        sed -i "s/^Description=.*/Description=$CLEAN_NAME/" "$TARGET_PATH"
     else
-        echo "  ↳ ℹ️ $SCHEME_FILE already present."
+        echo "Description=$CLEAN_NAME" >> "$TARGET_PATH"
     fi
 done
 
-echo "✅ All Tokyo Night variants successfully imported into Konsole."
+echo "✅ All Tokyo Night variants successfully patched and imported!"
 
 # Define the native Vim theme startup directory
 VIM_THEME_DIR="$HOME/.vim/pack/themes/start/tokyonight"
