@@ -169,6 +169,19 @@ else
     echo "ℹ️ Tokyo Night assets already present. Skipping download."
 fi
 
+# Define the native Vim theme startup directory
+VIM_THEME_DIR="$HOME/.vim/pack/themes/start/tokyonight"
+
+# Automate standard Vim Tokyo Night download
+if [ ! -d "$VIM_THEME_DIR" ]; then
+    echo "📥 Vim Tokyo Night theme not found. Downloading compatibility package..."
+    # Clones the vim-compatible version directly into Vim's native package loader
+    git clone --depth=1 https://github.com/ghifarit53/tokyonight-vim.git "$VIM_THEME_DIR"
+    echo "✅ Vim Tokyo Night theme ready."
+else
+    echo "ℹ️ Vim Tokyo Night theme already present. Skipping download."
+fi
+
 # Helper Function to Safley Link Files
 link_file() {
     local source_file="$1"
