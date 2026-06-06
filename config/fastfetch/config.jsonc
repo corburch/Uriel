@@ -1,61 +1,92 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-  "logo": {
-    "source": null, // Auto-detects the original OS ASCII art natively
-    "padding": {
-      "top": 1,
-      "left": 2
-    }
-  },
+  
   "display": {
-    "separator": " • ",
-    "color": {
-      "keys": "blue",
-      "title": "magenta"
-    }
+    "separator": "  → "
   },
+  
   "modules": [
-    "title",
     {
-      "type": "os",
-      "key": "os  "
+        "type": "os",
+        "key": "    ╭── "
     },
     {
-      "type": "kernel",
-      "key": "ker "
+        "type": "kernel",
+        "key": "OS  ├── 󰏗"
     },
     {
-      "type": "uptime",
-      "key": "up  "
+        "type": "shell",
+        "key": "    ╰── "
     },
-    {
-      "type": "packages",
-      "key": "pkg "
-    },
-    {
-      "type": "shell",
-      "key": "sh  "
-    },
-    {
-      "type": "wm",
-      "key": "wm  "
-    },
-    {
-      "type": "terminal",
-      "key": "term"
-    },
-    {
-      "type": "font",
-      "key": "font"
-    },
-    {
-      "type": "memory",
-      "key": "mem "
-    },
+
+
     "break",
+
+
     {
-      "type": "colors",
-      "symbol": "circle" // Renders clean circular color accents instead of blocks
-    }
+        "type": "wm",
+        "key": "    ╭── "
+    },
+    {
+        "type": "wmtheme",
+        "key": "WM  ├── "
+    },
+    {
+        "type": "font",
+        "key": "    ╰── "
+    },
+
+
+
+
+    "break",
+
+    {
+        "type": "host",
+        "key": "    ╭── "
+    },
+    {
+        "type": "cpu",
+        "key": "    ├── 󰻠"
+    },
+    {
+        "type": "gpu",
+        "key": "    ├── 󰢮",
+              "format": "{vendor} {type} ({core-count}) @ {frequency}"
+    },
+    {
+        "type": "memory",
+        "key": "PC  ├── "
+    },
+    {
+        "type": "disk",
+        "key": "    ├── 󰋊",
+        "format": "{size-used} / {size-total} ({size-percentage})"
+    },
+    {
+        "type": "wifi",
+        "key": "    ├── 󰖩",
+        "format": "{ssid} - {band} GHz - {security}"
+    },
+    {
+        "type": "display",
+        "key": "    ╰── 󰹑",
+        "format": "{width}x{height} @ {preferred-refresh-rate}hz"
+    },
+
+
+    
+    "break",
+
+
+
+    {
+    "type": "custom",
+    "format": "    {#30}████{#31}████{#32}████{#33}████{#34}████{#35}████{#36}████{#37}████"
+    },
+
+    "break"
+
+    
   ]
 }
